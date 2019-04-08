@@ -1,0 +1,84 @@
+﻿<Window x:Class="VisualEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VisualEditor"
+        mc:Ignorable="d"
+        Title="Visual Editor (In development)" Height="650" Width="1000">
+
+    <!-- Bind shortcuts -->
+    <Window.Resources>
+        <RoutedUICommand x:Key="CreateNodeCommand"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding 
+                        Command="{StaticResource CreateNodeCommand}" 
+                        Executed="CreateNodeCommandBinding_Executed" 
+                        CanExecute="CommandBinding_CanExecute"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Shift" Key="A" Command="{StaticResource CreateNodeCommand}"/>
+    </Window.InputBindings>
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" MinWidth="100" Margin="4">
+            <Button>Option 1</Button>
+            <Button>Option 2</Button>
+        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <Canvas Width="1024" Height="1024">
+                <Canvas.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.Items>
+                            <MenuItem>
+                                <MenuItem.Header>
+                                    <TextBlock Text="CNN (stub)"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem>
+                                <MenuItem.Header>
+                                    <TextBlock Text="LSTM (stub)"/>
+                                </MenuItem.Header>
+                            </MenuItem>
+                        </ContextMenu.Items>
+                    </ContextMenu>
+                </Canvas.ContextMenu>
+
+                <!-- Draw microcells in the background -->
+                <Canvas.Background>
+                    <DrawingBrush Viewport="0, 0, 0.03125, 0.03125" TileMode="Tile">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="DimGray">
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0, 0, 100, 100"/>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+
+                                <GeometryDrawing Brush="White">
+                                    <GeometryDrawing.Geometry>
+                                        <GeometryGroup>
+                                            <LineGeometry StartPoint="0, 12.5" EndPoint="100, 12.5"/>
+                                            <LineGeometry StartPoint="0, 37.5" EndPoint="100, 37.5"/>
+                                            <LineGeometry StartPoint="0, 62.5" EndPoint="100, 62.5"/>
+                                            <LineGeometry StartPoint="0, 87.5" EndPoint="100, 87.5"/>
+
+                                            <LineGeometry StartPoint="12.5, 0" EndPoint="12.5, 100"/>
+                                            <LineGeometry StartPoint="37.5, 0" EndPoint="37.5, 100"/>
+                                            <LineGeometry StartPoint="62.5, 0" EndPoint="62.5, 100"/>
+                                            <LineGeometry StartPoint="87.5, 0" EndPoint="87.5, 100"/>
+                                        </GeometryGroup>
+                                    </GeometryDrawing.Geometry>
+                                    <GeometryDrawing.Pen>
+                                        <Pen Thickness="1" Brush="LightGray" />
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Canvas.Background>
+            </Canvas>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
